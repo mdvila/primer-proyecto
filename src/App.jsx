@@ -10,8 +10,10 @@ function App() {
   // const  count            = 0
   //useState es un Hook que permite crear una variable de estado, escucha cambios en el estado y vuelve a renderizar el componente.
   const [count, setCount] = useState(0)
-  const [titulo, setTitulo] = useState('CALCULADORA')
-  const [colorTitle, setColorTitle] = useState('magenta')
+  const [titulo] = useState('CALCULADORA')
+  const [colorTitle] = useState('magenta')
+  const [valor1, setValor1] = useState("")
+  const [valor2, setValor2] = useState("")
 
   //useEffect es un Hook que permite ejecutar efectos secundarios, se compone de dos partes: la función que se ejecuta y el array de dependencias.
   //useEffect(funcion flecha ()=>{}, [dependencias])
@@ -35,12 +37,16 @@ function App() {
   //useCallback <- Memoizar funciones
   //useRef <- Referencias a elementos del DOM
   //setCount((count) => count + 1)
+  console.log("Identificador",valor1)
+  console.log("Identificador2",valor2)
   return (
     <>
       <h1 style={{ color: `${colorTitle}` }}> {titulo} </h1>
       <div className="card">
-        <ButtonCustom titlePepito={'SUMA'} funcionManuelita={() => setCount((count) => count + 1)} />
-        <ButtonCustom titlePepito={'RESTA'} funcionManuelita={() => setCount((count) => count - 1)} />
+        <input type='number'onChange={(e)=>{setValor1(e.target.value)}} value={valor1}/>
+        <input type='number'onChange={(e)=>{setValor2(e.target.value)}} value={valor2}/>
+        <ButtonCustom titlePepito={'SUMA'} funcionManuelita={() => setCount(Number(valor1) + Number(valor2))} />
+        <ButtonCustom titlePepito={'RESTA'} funcionManuelita={() => setCount(Number(valor1) - Number(valor2))} /> 
         <h2> Resultado {count} </h2>
       </div>
     </>
@@ -48,3 +54,4 @@ function App() {
 }
 //Permite importar el componente
 export default App
+
